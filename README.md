@@ -19,6 +19,13 @@ Once the project is running you may visit in a browser
 http://localhost:8080/console.htm
 ```
 
+You will note that there are 3 different types of messages that will be send over the websocket.  The web console listens for all of them, but you may elect to listen on whichever channel(s) you feel you need.
+```
+controlStream
+eventStream
+statusStream
+```
+
 From the web console, you may execute any cgate command you wish, for instance to toggle group 10 you may do something like:
 ```sh
 lighting off //HOME/254/56/10
