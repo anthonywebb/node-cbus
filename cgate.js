@@ -46,6 +46,7 @@ function parseMessage(data) {
 
   var packet = {raw:data};
   packet.type = 'unknown';
+  packet.source = 'cbus';
 
   var array = data.match(/\b[\S]+\b/g);
 
