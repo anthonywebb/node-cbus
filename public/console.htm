@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>C-Gate HTTP Commander</title>
+		<link href="/css/console.css" rel="stylesheet" type="text/css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    	<script src="/socket.io/socket.io.js"></script>
+    	<script>
+            $(document).ready(function(){
+                scrollDown();
+                $("#entry").keypress(function (e) {
+                    if (e.keyCode != 13) return;
+                    var msg = $("#entry").attr("value").replace("\n", "");
+                    if (!util.isBlank(msg)) {
+                        //put this in the stream first...
+                        var packet = {raw:msg};
+                        addStream('console',packet);
+                        $.getJSON('/do?cmd='+msg);
+                    };
+                    $("#entry").attr("value", ""); 
+                });
+            });
+            
+            var socket = io.connect();
+            
+            socket.on('controlStream', function (data) {
+                addStream("control",data);
+            });
+            
+            socket.on('eventStream', function (data) {
+                addStream("event",data);
+            });
+
+            socket.on('statusStream', function (data) {
+                addStream("status",data);
+            });
+
+            function addStream(type,data) {
+                console.log(data);
+
+                var messageElement = $(document.createElement("table"));
+
+                messageElement.addClass("message");
+                messageElement.addClass(type);
+
+                var d = new Date();
+
+                var content = '<tr>'
+                          + '  <td class="date">' + util.timeString(d) + '</td>'
+                          + '  <td class="nick">' + type + '</td>'
+                          + '  <td class="msg-text">' + data.raw  + '</td>'
+                          + '</tr>'
+                          ;
+
+                messageElement.html(content);
+
+                $("#log").append(messageElement);  
+                
+                scrollDown();  
+            }
+
+            function scrollDown () {
+                window.scrollTo(0,document.body.scrollHeight);
+                $("#entry").focus();
+            }
+
+            // utility functions
+            util = {
+              urlRE: /https?:\/\/([-\w\.]+)+(:\d+)?(\/([^\s]*(\?\S+)?)?)?/g, 
+
+              //  html sanitizer 
+              toStaticHTML: function(inputHtml) {
+                inputHtml = inputHtml.toString();
+                return inputHtml.replace(/&/g, "&amp;")
+                                .replace(/</g, "&lt;")
+                                .replace(/>/g, "&gt;");
+              }, 
+
+              //pads n with zeros on the left,
+              //digits is minimum length of output
+              //zeroPad(3, 5); returns "005"
+              //zeroPad(2, 500); returns "500"
+              zeroPad: function (digits, n) {
+                n = n.toString();
+                while (n.length < digits) 
+                  n = '0' + n;
+                return n;
+              },
+
+              //it is almost 8 o'clock PM here
+              //timeString(new Date); returns "19:49"
+              timeString: function (date) {
+                var minutes = date.getMinutes().toString();
+                var hours = date.getHours().toString();
+                return this.zeroPad(2, hours) + ":" + this.zeroPad(2, minutes);
+              },
+
+              //does the argument only contain whitespace?
+              isBlank: function(text) {
+                var blank = /^\s*$/;
+                return (text.match(blank) !== null);
+              }
+            };
+        </script>
+	</head>
+	<body>
+        <div id="app">
+            <div id="log">
+                
+            </div>
+            <div id="toolbar">
+                <ul id="status">
+                  <li>C-Gate HTTP Commander</li>
+                </ul>
+                <input tabindex="1" type="text" id="entry"/>
+            </div>
+        </div>
+	</body>
+    
+</html>

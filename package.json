@@ -1,0 +1,16 @@
+{
+  "name": "node-cgate",
+  "version": "0.0.2",
+  "private": false,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.x",
+    "carrier": "0.1.*",
+    "socket.io": "1.2.*"
+  },
+  "engines": {
+    "node": "0.10.*"
+  }
+}
