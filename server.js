@@ -25,7 +25,7 @@ app.get('/do', function (req, res) {
 	else {
 		res.send({ status: 'error', message: 'you must specify a command'},400);
 	}
-	
+
 });
 
 ////////////////////////
@@ -70,7 +70,7 @@ function parseMessage(data) {
 	// is this a lighting packet?
 	if (array[0]=='lighting') {
 		packet.type = 'lighting';
-		
+
 		packet.action = array[1];
 
 		// last element of arr2 is the group
@@ -100,7 +100,7 @@ function parseMessage(data) {
 		if(temp[0] == 'level') {
 			packet.type = 'info';
       packet.level = temp[1];
-			var ind = (array.length == 3 ? 1 : 0); 
+			var ind = (array.length == 3 ? 1 : 0);
       var temp2 = array[ind].match(/\d+/g);
 			packet.group = temp2[2];
 		}
@@ -115,5 +115,5 @@ function parseMessage(data) {
 }
 
 function processMessage(msg) {
-  
+
 }
