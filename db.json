@@ -1,0 +1,1133 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "enabled": true,
+            "name": "Turn on night lights",
+            "cronstring": "0 5 * * *",
+            "expression": "",
+            "commands": [
+                {
+                    "type": "lighting",
+                    "group": "30",
+                    "level": 100,
+                    "delay": 0,
+                    "timeout": 28800
+                }
+            ]
+        }
+    ],
+    "rules": [
+        {
+            "id": "1",
+            "enabled": true,
+            "name": "Late night hall motion",
+            "expression": "group=='95' && level > 0 && (time > '22:00' || time < dawn)",
+            "commands": [
+                {
+                    "type": "lighting",
+                    "group": "46",
+                    "level": 20,
+                    "delay": 0,
+                    "timeout": 90
+                },
+                {
+                    "type": "lighting",
+                    "group": "19",
+                    "level": 5,
+                    "delay": 0,
+                    "timeout": 90
+                },
+                {
+                    "type": "lighting",
+                    "group": "29",
+                    "level": 100,
+                    "delay": 0,
+                    "timeout": 90
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "enabled": true,
+            "name": "Turn off the sport court lights and pause the music if no one is playing",
+            "expression": "group=='65' && level == 0 && db.devices['8'].level > 0",
+            "commands": [
+                {
+                    "type": "lighting",
+                    "group": "8",
+                    "level": 0,
+                    "delay": 0,
+                    "timeout": 0
+                },
+                {
+                    "type": "url",
+                    "url": "http://localhost:5005/sport court/pause"
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "enabled": false,
+            "name": "Turn on the sport court lights when door opens at night and the light is off",
+            "expression": "group=='Z1' && level > 0 && (time > dusk || time < dawn) && db.devices['8'].level == 0",
+            "commands": [
+                {
+                    "type": "lighting",
+                    "group": "8",
+                    "level": 100,
+                    "delay": 0,
+                    "timeout": 0
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "enabled": true,
+            "name": "Sync the sport court light levels",
+            "expression": "group=='8'",
+            "commands": [
+                {
+                    "type": "lighting",
+                    "group": "10",
+                    "level": "level",
+                    "delay": 0,
+                    "timeout": 0
+                }
+            ]
+        },
+        {
+            "id": "5",
+            "enabled": true,
+            "name": "Skip to next song in the sports court",
+            "expression": "group=='93' && level==50",
+            "commands": [
+                {
+                    "type": "url",
+                    "url": "http://localhost:5005/sport court/next"
+                }
+            ]
+        },
+        {
+            "id": "6",
+            "enabled": true,
+            "name": "Pause the music in the sports court",
+            "expression": "group=='93' && level==0",
+            "commands": [
+                {
+                    "type": "url",
+                    "url": "http://localhost:5005/sport court/pause"
+                }
+            ]
+        },
+        {
+            "id": "7",
+            "enabled": true,
+            "name": "Play the basketball playlist in the sports court",
+            "expression": "group=='93' && level==100",
+            "commands": [
+                {
+                    "type": "url",
+                    "url": "http://localhost:5005/sport court/volume/50"
+                },
+                {
+                    "type": "url",
+                    "url": "http://localhost:5005/sport court/favorite/basketball"
+                }
+            ]
+        },
+        {
+            "id": "8",
+            "enabled": false,
+            "name": "Debug",
+            "expression": "group=='73'",
+            "commands": [
+                {
+                    "type": "lighting",
+                    "group": "47",
+                    "level": "50",
+                    "delay": 0,
+                    "timeout": 5
+                }
+            ]
+        }
+    ],
+    "scenes": [
+        {
+            "id": "1",
+            "name": "Party Mode",
+            "commands": [
+                {
+                    "type": "lighting",
+                    "group": "20",
+                    "level": 20,
+                    "delay": 0,
+                    "timeout": 0
+                },
+                {
+                    "type": "lighting",
+                    "group": "22",
+                    "level": 50,
+                    "delay": 0,
+                    "timeout": 0
+                },
+                {
+                    "type": "lighting",
+                    "group": "85",
+                    "level": 0,
+                    "delay": 0,
+                    "timeout": 0
+                },
+                {
+                    "type": "lighting",
+                    "group": "31",
+                    "level": 100,
+                    "delay": 0,
+                    "timeout": 0
+                }
+            ]
+        }
+    ],
+    "devices": {
+        "0": {
+            "name": "Flood",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "1": {
+            "name": "Main Bay",
+            "location": "Garage",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "2": {
+            "name": "3rd Bay",
+            "location": "Garage",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "3": {
+            "name": "Closet",
+            "location": "Court",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "4": {
+            "name": "Goal",
+            "location": "Court",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "5": {
+            "name": "Bath Fan",
+            "location": "Mudroom",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "6": {
+            "name": "Flood",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": 1412315405,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "7": {
+            "name": "Rope",
+            "location": "Great Room",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "8": {
+            "name": "Main",
+            "location": "Court",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "9": {
+            "name": "Eave 2",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "10": {
+            "name": "Main",
+            "location": "Court",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "11": {
+            "name": "Eave 1",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "12": {
+            "name": "Flowers",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "13": {
+            "name": "Cans",
+            "location": "Kitchen",
+            "level": 0,
+            "lastchange": 1412315067,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "14": {
+            "name": "Pantry",
+            "location": "Kitchen",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "15": {
+            "name": "Sconces",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": 1412315067,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "16": {
+            "name": "Main",
+            "location": "Office",
+            "level": 0,
+            "lastchange": 1412315577,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "17": {
+            "name": "Barrel",
+            "location": "Entry",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "18": {
+            "name": "Barrel",
+            "location": "Entry",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "19": {
+            "name": "Main",
+            "location": "Great Room",
+            "level": 0,
+            "lastchange": 1412315289,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "20": {
+            "name": "TV",
+            "location": "Family",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "21": {
+            "name": "Dining",
+            "location": "Kitchen",
+            "level": 0,
+            "lastchange": 1412315067,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "22": {
+            "name": "Game",
+            "location": "Family",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "23": {
+            "name": "Floor",
+            "location": "Great Room",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "24": {
+            "name": "Rope",
+            "location": "Office",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "25": {
+            "name": "Tray",
+            "location": "Great Room",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "26": {
+            "name": "Mantel",
+            "location": "Great Room",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "27": {
+            "name": "Exhaust",
+            "location": "Kitchen",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "28": {
+            "name": "Bath Fan",
+            "location": "Exercise",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "29": {
+            "name": "Upper",
+            "location": "Kitchen",
+            "level": 0,
+            "lastchange": 1412315289,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "30": {
+            "name": "Night",
+            "location": "Main",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "31": {
+            "name": "Cabinet",
+            "location": "Family",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "32": {
+            "name": "Tray",
+            "location": "Kitchen",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "33": {
+            "name": "Cabinet",
+            "location": "Laundry",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "34": {
+            "name": "Under",
+            "location": "Kitchen",
+            "level": 0,
+            "lastchange": 1412315067,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "35": {
+            "name": "Main",
+            "location": "Laundry",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "36": {
+            "name": "Porch",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "37": {
+            "name": "Hall",
+            "location": "Mudroom",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "38": {
+            "name": "Entry",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": 1412315067,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "39": {
+            "name": "Lower",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": 1412318075,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "40": {
+            "name": "Bathroom",
+            "location": "Mudroom",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "41": {
+            "name": "Main",
+            "location": "Exercise",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "42": {
+            "name": "Stairs",
+            "location": "Main",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "43": {
+            "name": "Closet",
+            "location": "Master Bath",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "44": {
+            "name": "Main",
+            "location": "Master Bath",
+            "level": 0,
+            "lastchange": 1412315666,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "45": {
+            "name": "Toilet",
+            "location": "Master Bath",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "46": {
+            "name": "Hall",
+            "location": "Main",
+            "level": 0,
+            "lastchange": 1412315289,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "47": {
+            "name": "Shower",
+            "location": "Master Bath",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "48": {
+            "name": "Vanity",
+            "location": "Master Bath",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "49": {
+            "name": "Tub",
+            "location": "Master Bath",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "50": {
+            "name": "Vanity",
+            "location": "Master Bath",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "51": {
+            "name": "Main",
+            "location": "Master Bdrm",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "52": {
+            "name": "Fan",
+            "location": "Master Bath",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "53": {
+            "name": "Anthony",
+            "location": "Master Bdrm",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "54": {
+            "name": "Emily",
+            "location": "Master Bdrm",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "55": {
+            "name": "Main",
+            "location": "Babys Room",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "56": {
+            "name": "Main",
+            "location": "Graham",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "57": {
+            "name": "Main",
+            "location": "Guest",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "58": {
+            "name": "Sconce",
+            "location": "Boys",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "59": {
+            "name": "Main",
+            "location": "Boys",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "60": {
+            "name": "Fireplace",
+            "location": "Great Room",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "61": {
+            "name": "Fireplace",
+            "location": "Master Bdrm",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "62": {
+            "name": "Motion",
+            "location": "Family",
+            "level": 255,
+            "lastchange": 1412317890,
+            "type": "motion",
+            "visible": true,
+            "status": "on",
+            "vendor": "cbus"
+        },
+        "63": {
+            "name": "Motion",
+            "location": "Mudroom",
+            "level": 0,
+            "lastchange": 1412315835,
+            "type": "motion",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "64": {
+            "name": "Motion",
+            "location": "Boys",
+            "level": 0,
+            "lastchange": null,
+            "type": "motion",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "65": {
+            "name": "Motion",
+            "location": "Court",
+            "level": 0,
+            "lastchange": null,
+            "type": "motion",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "66": {
+            "name": "Cans",
+            "location": "Shop",
+            "level": 0,
+            "lastchange": 1412318079,
+            "type": "motion",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "67": {
+            "name": "East",
+            "location": "Shop",
+            "level": 0,
+            "lastchange": null,
+            "type": "motion",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "68": {
+            "name": "Main",
+            "location": "Shop",
+            "level": 0,
+            "lastchange": null,
+            "type": "motion",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "69": {
+            "name": "West",
+            "location": "Shop",
+            "level": 0,
+            "lastchange": null,
+            "type": "motion",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "70": {
+            "name": "Bath",
+            "location": "Exercise",
+            "level": 0,
+            "lastchange": null,
+            "type": "motion",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "72": {
+            "name": "Exhaust",
+            "location": "Master Bath",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "73": {
+            "name": "Tray",
+            "location": "Master Bdrm",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "74": {
+            "name": "Cabinet",
+            "location": "Master Bath",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "75": {
+            "name": "Fan",
+            "location": "Bathroom",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "76": {
+            "name": "Fan",
+            "location": "Babys Room",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "77": {
+            "name": "Exhaust",
+            "location": "Bathroom",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "78": {
+            "name": "Fan",
+            "location": "Master Bdrm",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "79": {
+            "name": "Lamp",
+            "location": "Entry",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "80": {
+            "name": "Eave 3",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "81": {
+            "name": "Flowers",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "82": {
+            "name": "Eyeballs",
+            "location": "Great Room",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "83": {
+            "name": "Main",
+            "location": "Bathroom",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "84": {
+            "name": "Shower",
+            "location": "Bathroom",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "85": {
+            "name": "Hall",
+            "location": "Family",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "86": {
+            "name": "Desk",
+            "location": "Boys",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "87": {
+            "name": "Toilet",
+            "location": "Bathroom",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "88": {
+            "name": "Vanity",
+            "location": "Bathroom",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "89": {
+            "name": "Closet",
+            "location": "Graham",
+            "level": 0,
+            "lastchange": null,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "90": {
+            "name": "Rear",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": 1412315068,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "91": {
+            "name": "West",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": 1412315068,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "92": {
+            "name": "East",
+            "location": "Outdoor",
+            "level": 0,
+            "lastchange": 1412315068,
+            "type": "lighting",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "93": {
+            "name": "Music",
+            "location": "Court",
+            "level": 0,
+            "lastchange": null,
+            "type": "sonos",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        },
+        "95": {
+            "name": "Motion",
+            "location": "Main",
+            "level": 0,
+            "lastchange": 1412315889,
+            "type": "motion",
+            "visible": true,
+            "status": "off",
+            "vendor": "cbus"
+        }
+    }
+}

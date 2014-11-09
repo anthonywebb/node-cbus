@@ -1,26 +1,25 @@
 var net = require('net');
 var carrier = require('carrier');
-var common = require('./common');
-var config = require('./config');
 
-// TELNET SESSION TO CONTROL
-var control = net.createConnection(config.cgate.contolport,config.cgate.host);
+var control = {};
+var events = {};
+var statuses = {};
 
-// TELNET CHANNEL TO STATUS UPDATES
-var events = net.createConnection(config.cgate.eventport,config.cgate.host);
-
-// TELNET CHANNEL TO STATUS UPDATES
-var statuses = net.createConnection(config.cgate.statusport,config.cgate.host);
-
-exports.init = function(io){
+exports.init = function(){
+  // TELNET SESSION TO CONTROL
+  control = net.createConnection(CONFIG.cgate.contolport,CONFIG.cgate.host);
   carrier.carry(control, function(line) {
     pushRealtime('controlStream',line);
   });
 
+  // TELNET CHANNEL TO STATUS UPDATES
+  events = net.createConnection(CONFIG.cgate.eventport,CONFIG.cgate.host);
   carrier.carry(events, function(line) {
     pushRealtime('eventStream',line);
   });
 
+  // TELNET CHANNEL TO STATUS UPDATES
+  statuses = net.createConnection(CONFIG.cgate.statusport,CONFIG.cgate.host);
   carrier.carry(statuses, function(line) {
     pushRealtime('statusStream',line);
   });
@@ -29,19 +28,59 @@ exports.init = function(io){
   function pushRealtime(type, message) {
     console.log(type+' : '+message);
     // every message, before being sent out needs to be parsed to create a nice object that can be consumed
-    var parsedMessage = parseMessage(message);
-    io.emit(type, parsedMessage);
+    var parsedMessage = parseMessage(message,type);
+    IO.emit(type, parsedMessage);
   }
+
+  return module.exports;
 }
 
 exports.write = function(msg){
-  control.write(msg);
+  if(msg){
+    control.write(msg);
+  }
+}
+
+exports.cmdString = function(device,command,level,delay) {
+    var message = '';
+
+    if(command=='on') {
+        message = 'ON //'+CONFIG.cgate.cbusname+'/'+CONFIG.cgate.network+'/'+CONFIG.cgate.application+'/'+device+'\n';
+    }
+    else if (command=='off') {
+        message = 'OFF //'+CONFIG.cgate.cbusname+'/'+CONFIG.cgate.network+'/'+CONFIG.cgate.application+'/'+device+'\n';
+    }
+    else if (command=='ramp') {
+
+      if (level <= 100) {
+        if (delay) {
+          message = 'RAMP //'+CONFIG.cgate.cbusname+'/'+CONFIG.cgate.network+'/'+CONFIG.cgate.application+'/'+device+' '+level+'% '+delay+'\n';
+        } else {
+          message = 'RAMP //'+CONFIG.cgate.cbusname+'/'+CONFIG.cgate.network+'/'+CONFIG.cgate.application+'/'+device+' '+level+'%\n';
+        }
+      }
+    }
+    return message;
+}
+
+function humanLevelValue(level) {
+    // convert levels from 0-255 to 0-100
+    var temp = Math.round((level/255)*100)
+
+    if(temp > 100){
+        temp = 100;
+    }
+    else if(temp < 0){
+        temp = 0;
+    }
+
+    return temp;
 }
 
 ////////////////////////
 // MESSAGE PROCESSING
 ////////////////////////
-function parseMessage(data) {
+function parseMessage(data,type) {
   console.log(data);
 
   var packet = {raw:data};
@@ -64,10 +103,14 @@ function parseMessage(data) {
     var parseoid = array[4];
 
     if (packet.action == 'ramp') {
-      packet.level = array[3];
+      packet.level = humanLevelValue(array[3]);
       packet.time = array[4];
       parseunit = array[5];
       parseoid = array[6];
+    } else if (packet.action == 'on') {
+      packet.level = 100;
+    } else if (packet.action == 'off') {
+      packet.level = 0;
     }
 
     temp = parseunit.split('=');
@@ -91,8 +134,11 @@ function parseMessage(data) {
 
   console.log(packet);
 
-  // are there custom things we want to do when this event occurs?
-  common.processMessage(packet);
+  // are there custom things we want to do when this event occurs? ONLY do this for the status stream
+  if(type=='statusStream'){
+    COMMON.processMessage(packet);
+  }
+
 
   return packet;
 }
