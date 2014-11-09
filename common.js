@@ -169,7 +169,7 @@ function processLightingCommand(command,level) {
 
     function sendLightingCommand(device,command,level,delay,vendor){
       if(vendor=='cbus'){
-        var cmd = CBUS.cmdString(command.group,'off',0,0);
+        var cmd = CBUS.cmdString(device,command,level,delay);
         CBUS.write(cmd);
       }
       // TODO: integration with other vendors here?
