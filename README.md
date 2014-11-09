@@ -7,6 +7,9 @@ From the base directory of the project type:
 $ npm install
 ```
 
+### Configure
+A sample configuration script can be found in the project.  Note that currently only the CGATE connector exists, but I do expect in the future to add direct CNI connection, and potentially others.
+
 ### Run
 From the base directory of the project type: 
 ```sh
