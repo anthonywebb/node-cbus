@@ -24,7 +24,7 @@ From the web console, you may execute any cgate command you wish, for instance t
 lighting off //HOME/254/56/10
 lighting on //HOME/254/56/10
 ```
-If you are looking for a simply http integration, the same cgate commands may also be sent over http by doing an HTTP GET to the /do endpoint like this:
+If you are looking for a simple http endpoint to integrate with, the same cgate commands may also be sent over http by doing an HTTP GET to the /do endpoint like this:
 ```
 http://localhost:8080/do?cmd=lighting on //HOME/254/56/10
 ```
