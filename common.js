@@ -20,7 +20,7 @@ exports.processMessage = function(packet){
 
     updateDeviceData(packet.group,packet.level);
 
-    // info packets come from a bootstrap operation
+    // info packets come from a bootstrap operation, we dont want to process rules for them
     if(packet.type!='info'){
       processRules(packet.group,DB.devices[packet.group]);
     }

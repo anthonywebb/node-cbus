@@ -183,7 +183,7 @@ function clicker(id) {
     var elem = $('#group'+id);
     var currval = elem.attr("status");
     if(currval=="off") {
-        turnme = "on";
+        turnme = "off";
 
         // send these to the api
         apilevel = 100;
@@ -197,7 +197,7 @@ function clicker(id) {
         elem.find('div.element > p.level').html("100");
     }
     else {
-        turnme = "off";
+        turnme = "on";
 
         // send these to the api
         apilevel = 0;
@@ -218,6 +218,7 @@ function clicker(id) {
 };
 
 function updateData(elem){
-    $container.isotope( 'updateSortData', elem ).isotope();
-    //window.scrollTo(0, 0);
+  console.log('sorting the grid');
+  $container.isotope( 'updateSortData', elem ).isotope();
+  //window.scrollTo(0, 0);
 };
