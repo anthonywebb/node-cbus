@@ -16,6 +16,12 @@ From the base directory of the project type:
 $ node server.js
 ```
 
+### Web UI
+There is a default WebUI that is responsive for all screen sizes.  Check it out:
+```sh
+http://localhost:8080
+```
+
 ### Rules 
 The rules engine will fire anytime there is a level change on a group.  Rules have an expression that will evaluate the javascript, and fire the command(s) associated with the rule.  The expression can use variables such as group level, or even some canned variables that are available such as sunset, sunrise, time, etc.  NOTE!!! It is important that the server running this node process be in the UTC, if it is not, the time variables will be off.  Here is an example of a rule that ramps up the hall light if motion is sensed in a given area after 11PM (and before dawn):
 
