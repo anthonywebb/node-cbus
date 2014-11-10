@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Lights</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/alertify.core.css" rel="stylesheet">
+		<link href="css/alertify.default.css" rel="stylesheet">
+		<style>
+            body {
+                padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+            }
+        </style>
+		<link href="css/bootstrap-responsive.css" rel="stylesheet">
+		
+	</head>
+	<body>
+        <div class="header">
+            <div class="navbar navbar-inverse navbar-fixed-top" style="z-index: 10;">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        
+                        <a class="brand" href="/">Clipsal Lighting</a>
+                        
+                        <div class="nav-collapse collapse">
+                            
+                            <ul class="nav pull-right">
+                                <li class="active" style="padding-right:100px;"><a href="/settings.html">Settings</a></li>
+                            </ul>
+                            
+                        </div>
+                        <!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="row-fluid">
+                <div id="content" class="span12">
+                    <form method="post" action="/settings" id="updateForm">
+                        <fieldset>
+                            <legend>Settings</legend>
+                            
+                            <table class="table table-striped" id="sortTable">
+                                <thead>
+                                    <tr>
+                                        <th>Device</th>
+                                        <th>Last</th>
+                                        <th>Changes</th>
+                                        <th>Runtime</th>
+                                        <th>Score</th>
+                                        <th>Name</th>
+                                        <th>Location</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblbody">
+                                    
+                                </tbody>
+                            </table>
+                            
+                            <div class="form-actions">  
+                                <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Save</button>
+                                <a href="/" class="btn">Cancel</a>
+                            </div> 
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+		<script src="js/jquery.tablesorter.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/alertify.min.js"></script>
+		<script src="js/moment.min.js"></script>
+		<script src="js/settings.js"></script>
+	</body>
+    
+</html>

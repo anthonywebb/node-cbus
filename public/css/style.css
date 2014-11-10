@@ -1,0 +1,108 @@
+/**** Isotope Filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope CSS3 transitions ****/
+
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
+
+/***** MYSTUFF *******/
+
+.item {
+  width: 110px;
+  height: 110px;
+  margin: 5px;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  -webkit-border-top-right-radius: 1.2em;
+      -moz-border-radius-topright: 1.2em;
+          border-top-right-radius: 1.2em;
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+.item-on {
+  color: #FFF;
+  background: #37BC61;
+}
+
+.item-off {
+  color: #CDCDCD;
+  background: #F2F2F2;
+}
+
+.element * {
+  position: absolute;
+  margin: 0;
+}
+
+.element .name {
+  left: 0.2em;
+  top: 1.6em;
+  font-size: 1.6em;
+  line-height: 1.0em;
+}
+
+.element .location {
+  left: 0.5em;
+  bottom: 1.5em;
+  font-size: 1.00em;
+}
+
+.element .group {
+  font-size: 0.75em;
+  left: 0.7em;
+  bottom: 0.5em;
+}
+
+.element .level {
+  font-size: 0.8em;
+  color: #F2F2F2;
+  right: 0.5em;
+  top: 0.5em;
+}

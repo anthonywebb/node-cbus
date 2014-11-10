@@ -11,12 +11,12 @@ $ npm install
 A sample configuration script can be found in the project along with a "db.json" files.  Note that currently in the config only the CGATE connector exists, but I do expect in the future to add direct CNI connection, and potentially others.  The db.json file should give you a template of how to set up your devices, rules, tasks, etc.  Details can be found below.
 
 ### Run
-From the base directory of the project type: 
+From the base directory of the project type:
 ```sh
 $ node server.js
 ```
 
-### Rules 
+### Rules
 The rules engine will fire anytime there is a level change on a group.  Rules have an expression that will evaluate the javascript, and fire the command(s) associated with the rule.  The expression can use variables such as group level, or even some canned variables that are available such as sunset, sunrise, time, etc.  Here is an example of a rule that ramps up the hall light if motion is sensed in a given area after 11PM (and before dawn):
 ```
 {
@@ -29,7 +29,7 @@ The rules engine will fire anytime there is a level change on a group.  Rules ha
 }
 ```
 
-###Tasks 
+###Tasks
 Task are recurring tasks that should fire command(s) on a given interval.  In order to do that a CRON string is given which allows for very complex scheduled tasks to run at various intervals, on certain days, etc.  CRON strings seemed like a great way to do recurring tasks.  Here is an example that turns on the night lights every day of the week at 8:30PM:
 ```
 {
@@ -58,13 +58,13 @@ Scenes are pretty straight forward, when triggered and array of commands are fir
 }
 ```
 
-### Commands 
+### Commands
 As illustrated above commands are an array of things that should happen when a task happens, a rule is matched, or a scene fires.  Commands generally are just modifying the level of light, but each command has a "type" which allows for more flexible scenarios.  Other types include: lighting, delay, url, email, sms, etc.  Ever wanted to get a url callback when a button on the wall is pressed?  You can do that.  Need an SMS when motion is detected during certain hours? You can do that.  The command types should allow for a lot of use cases.  When using the lighting command you may also add a delay (which is the ramp delay), and/or also a timeout which allows the group to auto turn off after X seconds.
 
 ### Other
-Once the project is running you may visit in a browser 
+Once the project is running you may visit in a browser
 ```
-http://localhost:8080/console.htm
+http://localhost:8080/console.html
 ```
 
 You will note that there are 3 different types of messages that will be send over the websocket.  The web console listens for all of them, but you may elect to listen on whichever channel(s) you feel you need.
@@ -79,7 +79,7 @@ From the web console, you may execute any cgate command you wish, for instance t
 lighting off //HOME/254/56/10
 lighting on //HOME/254/56/10
 ```
-If you are looking for a simple http endpoint to integrate with, the same cgate commands may also be sent over http by doing an HTTP GET to the /do endpoint like this:
+If you are looking for a simple http endpoint to integrate with, the same cgate commands may also be sent over http by doing an HTTP GET to the /cgate endpoint like this:
 ```
-http://localhost:8080/do?cmd=lighting on //HOME/254/56/10
+http://localhost:8080/cgate?cmd=ON //HOME/254/56/10
 ```

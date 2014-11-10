@@ -18,22 +18,40 @@ exports.processMessage = function(packet){
   if(DB.devices[packet.group]){
     var oldLevel = DB.devices[packet.group].level;
 
-    // record the timestamp of this level change and update the current level
-    DB.devices[packet.group].lastchange = moment().unix();
-    DB.devices[packet.group].level = packet.level;
+    updateDeviceData(packet.group,packet.level);
 
-    processRules(packet.group,DB.devices[packet.group]);
+    // info packets come from a bootstrap operation
+    if(packet.type!='info'){
+      processRules(packet.group,DB.devices[packet.group]);
+    }
 
     // TODO: not sure how to accomplish this without knowing that the status event was driven by a button press  (is sourceunit == 1 what I am after?)
     // kill any timers that might be running for this group if we got a manual state change
     //if (packet.level > 0 && packet.sourceunit > 1) {
     //    killTimer(packet.group);
     //}
+
+    // only notify the UI of stuff that is not hidden and it is a new level
+    if(DB.devices[packet.group].visible && oldLevel!=packet.level){
+      var sendMsg = {type:"update_status",group:packet.group,level:parseInt(packet.level),name:DB.devices[packet.group].name,location:DB.devices[packet.group].location};
+      console.log('sending');
+      console.log(sendMsg);
+      var realtimepacket = sendMsg;
+      IO.emit('statusStream', realtimepacket);
+    }
   }
 }
 
 exports.doCommands = function(cmdArray,level) {
+  console.log(cmdArray);
   processCommands(cmdArray,level);
+}
+
+function updateDeviceData(group, level){
+  // record the timestamp of this level change and update the current level
+  console.log('updating data for group '+group);
+  DB.devices[group].lastchange = moment().unix();
+  DB.devices[group].level = level;
 }
 
 function processCommands(cmdArray,level) {
@@ -124,18 +142,20 @@ function processRules(id,device) {
 
 function processUrlCommand(command) {
     request(command.url, function (error, response, body) {
-        if (error && response.statusCode != 200) {
-            console.log('got back an error when calling '+command.url+': ('+response.statusCode+') '+err.message); // Print the google web page.
+        if (error) {
+          console.log('got back an error when calling '+command.url+': '+err.message);
+        } else if (response.statusCode != 200) {
+          console.log('got back an error when calling '+command.url+': '+response.statusCode);
         }
     });
 }
 
 function processLightingCommand(command,level) {
     // only need to adjust the actual lighting level (which we will cast to 0-100) if it is not at the level the scene says it needs to be
-    var changeto = command.level;
+    var changeto = parseInt(command.level);
     var cmdtext = 'ramp';
 
-    if(command.level!=DB.devices[command.group].level){
+    if(changeto!=DB.devices[command.group].level){
       // they might have a command passed from a rule, and want to use the level from the group that triggered the rule (useful for syncing)
       if(command.level == 'level') {
         changeto = level;
@@ -170,6 +190,8 @@ function processLightingCommand(command,level) {
     function sendLightingCommand(device,command,level,delay,vendor){
       if(vendor=='cbus'){
         var cmd = CBUS.cmdString(device,command,level,delay);
+        console.log('DEBUG!!!!');
+        console.log(cmd);
         CBUS.write(cmd);
       }
       // TODO: integration with other vendors here?
@@ -194,4 +216,33 @@ function getTimeString(dd,tzoffset) {
     hh = ( hh < 10 ? "0" : "" ) + hh;
 
     return hh + ":" + mm;
+}
+
+////////////////////////////
+// OTHER METHODS
+////////////////////////////
+
+// we store devices funky natively for speed reasons, this converts to an array that devs will like better
+exports.deviceObjToArray = function(devices){
+    //console.log(devices);
+    var groups = _.keys(devices);
+    var returnval = [];
+    _.each(groups,function(group){
+        var obj = {group:group};
+        obj.level = parseInt(devices[group].level);
+        obj.status = devices[group].status;
+        obj.name = devices[group].name;
+        obj.location = devices[group].location;
+        obj.lastchange = devices[group].lastchange;
+        obj.changecount = devices[group].changecount;
+        obj.runtime = devices[group].runtime;
+        obj.type = devices[group].type;
+        obj.energyused = devices[group].energyused;
+
+        // only pop it on the list if it is visible
+        if(devices[group].visible){
+            returnval.push(obj);
+        }
+    });
+    return returnval;
 }

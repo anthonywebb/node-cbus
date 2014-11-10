@@ -32,6 +32,11 @@ exports.init = function(){
     IO.emit(type, parsedMessage);
   }
 
+  // periodically list the levels of all devices to make sure they are in sync
+  setTimeout(syncLevels, 5000);
+  // repeat every 20 mins
+  setInterval(syncLevels, 1200000)
+
   return module.exports;
 }
 
@@ -75,6 +80,12 @@ function humanLevelValue(level) {
     }
 
     return temp;
+}
+
+function syncLevels(){
+  console.log('cgate syncing levels');
+  var msg = message = 'GET //'+CONFIG.cgate.cbusname+'/'+CONFIG.cgate.network+'/'+CONFIG.cgate.application+'/* level\n';
+  control.write(msg);
 }
 
 ////////////////////////
@@ -125,17 +136,22 @@ function parseMessage(data,type) {
     var temp = array[array.length-1].split('=');
     if(temp[0] == 'level') {
       packet.type = 'info';
-      packet.level = temp[1];
+      packet.level = humanLevelValue(temp[1]);
+      if(packet.level>0){
+        packet.status = 'on';
+      } else {
+        packet.status = 'off';
+      }
       var ind = (array.length == 3 ? 1 : 0);
       var temp2 = array[ind].match(/\d+/g);
-      packet.group = temp2[2];
+      packet.group = temp2[temp2.length-1];
     }
   }
 
   console.log(packet);
 
   // are there custom things we want to do when this event occurs? ONLY do this for the status stream
-  if(type=='statusStream'){
+  if(type=='statusStream'||packet.type=='info'){
     COMMON.processMessage(packet);
   }
 

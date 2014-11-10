@@ -1,3 +1,4 @@
+var _ = require('underscore');
 CONFIG = require('./config');
 
 ////////////////////////
@@ -26,10 +27,10 @@ IO = require('socket.io')(server);
 
 app.use('/',express.static(__dirname + '/public'));
 server.listen(CONFIG.webserver.port,CONFIG.webserver.host);
-console.log('Console on: http://'+CONFIG.webserver.host+':'+CONFIG.webserver.port+'/console.htm');
+console.log('Console on: http://'+CONFIG.webserver.host+':'+CONFIG.webserver.port+'/console.html');
 
 // HTTP ROUTES
-app.get('/do', function (req, res) {
+app.get('/cgate', function (req, res) {
   if (req.query.cmd) {
     var command = req.query.cmd.trim() + '\r';
     console.log('remoteCommand : ' + command);
@@ -41,10 +42,30 @@ app.get('/do', function (req, res) {
   }
 });
 
+app.get('/cmd', function (req, res) {
+    console.log(req.query);
+    var commandArray = [{type:'lighting',group:req.query.device,level:parseInt(req.query.level),delay:parseInt(req.query.delay),timeout:parseInt(req.query.timeout)}];
+    COMMON.doCommands(commandArray);
+    res.send(JSON.stringify({ status: 'ok'}));
+});
+
+app.get('/locations', function (req, res) {
+    // loop over the keys and build the response (an array of objects)
+    var resp = _.uniq(_.pluck(COMMON.deviceObjToArray(DB.devices), 'location'));
+    resp = _.sortBy(resp, function(str){ return str; });
+    res.json(resp);
+});
+app.get('/scenes', function (req, res) {
+    res.json(DB.scenes);
+});
+
+app.get('/devices', function (req, res) {
+    res.json(COMMON.deviceObjToArray(DB.devices));
+});
+
 /////////////////////////////
 // SCHEDULED TASKS
 /////////////////////////////
-var _ = require('underscore');
 var cronjobs = {};
 var cronjob = require('cron').CronJob;
 // load up everything currently in the DB
