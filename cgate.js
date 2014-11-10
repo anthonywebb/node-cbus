@@ -8,18 +8,54 @@ var statuses = {};
 exports.init = function(){
   // TELNET SESSION TO CONTROL
   control = net.createConnection(CONFIG.cgate.contolport,CONFIG.cgate.host);
+  control.on('error', function(error){
+      console.log('cgate control socket error: ' + error);
+  });
+  control.on('end', function(){
+      console.log('cgate control socket terminated');
+  });
+  control.on('close', function(){
+      console.log('cgate control socket closed');
+  });
+  control.on('timeout', function(){
+      console.log('cgate control socket timed out');
+  });
   carrier.carry(control, function(line) {
     pushRealtime('controlStream',line);
   });
 
   // TELNET CHANNEL TO STATUS UPDATES
   events = net.createConnection(CONFIG.cgate.eventport,CONFIG.cgate.host);
+  events.on('error', function(error){
+      console.log('cgate events socket error: ' + error);
+  });
+  events.on('end', function(){
+      console.log('cgate events socket terminated');
+  });
+  events.on('close', function(){
+      console.log('cgate events socket closed');
+  });
+  events.on('timeout', function(){
+      console.log('cgate events socket timed out');
+  });
   carrier.carry(events, function(line) {
     pushRealtime('eventStream',line);
   });
 
   // TELNET CHANNEL TO STATUS UPDATES
   statuses = net.createConnection(CONFIG.cgate.statusport,CONFIG.cgate.host);
+  statuses.on('error', function(error){
+      console.log('cgate statuses socket error: ' + error);
+  });
+  statuses.on('end', function(){
+      console.log('cgate statuses socket terminated');
+  });
+  statuses.on('close', function(){
+      console.log('cgate statuses socket closed');
+  });
+  statuses.on('timeout', function(){
+      console.log('cgate statuses socket timed out');
+  });
   carrier.carry(statuses, function(line) {
     pushRealtime('statusStream',line);
   });
