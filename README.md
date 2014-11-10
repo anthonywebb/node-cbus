@@ -83,8 +83,8 @@ statusStream
 
 From the web console, you may execute any cgate command you wish, for instance to toggle group 10 you may do something like:
 ```sh
-lighting off //HOME/254/56/10
-lighting on //HOME/254/56/10
+OFF //HOME/254/56/10
+ON //HOME/254/56/10
 ```
 If you are looking for a simple http endpoint to integrate with, the same cgate commands may also be sent over http by doing an HTTP GET to the /cgate endpoint like this:
 ```
