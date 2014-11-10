@@ -11,7 +11,7 @@
     "socket.io": "1.2.*",
     "underscore": "1.7.*",
     "moment": "2.8.*",
-    "time": "0.11.*",
+    "moment-timezone": "0.2.*",
     "suncalc": "1.6.*",
     "request": "2.44.*",
     "cron": "1.0.*"

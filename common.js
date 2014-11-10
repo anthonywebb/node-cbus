@@ -1,6 +1,6 @@
 var moment = require('moment');
+var timez = require('moment-timezone');
 var _ = require('underscore');
-var tm = require('time');
 var suncalc = require('suncalc');
 var request = require('request');
 
@@ -107,17 +107,16 @@ function processCommands(cmdArray,level) {
 
 function processRules(id,device) {
     // first off we need to extract some values so we can process the expression
-    var dd = new tm.Date();
-    dd.setTimezone(CONFIG.location.timezone);
+    var dd = timez().tz(CONFIG.location.timezone);
 
     var times = suncalc.getTimes(dd,CONFIG.location.latitude,CONFIG.location.longitude);
 
     // variables we can use in our expressions
-    var time = getTimeString(dd,dd.getTimezoneOffset()); // the current time
-    var sunset = getTimeString(times.sunset,dd.getTimezoneOffset()); // sun starts to set
-    var dusk = getTimeString(times.dusk,dd.getTimezoneOffset()); // sun has fully set and it is starting to get dark
-    var sunrise = getTimeString(times.sunrise,dd.getTimezoneOffset()); // sun has started to rise
-    var dawn = getTimeString(times.dawn,dd.getTimezoneOffset()); // sun has not risen but it is starting to get light
+    var time = timez().tz(CONFIG.location.timezone).format('hh:mm'); // the current time
+    var sunset = timez(times.sunset).tz(CONFIG.location.timezone).format('hh:mm'); // sun starts to set
+    var dusk = timez(times.dusk).tz(CONFIG.location.timezone).format('hh:mm'); // sun has fully set and it is starting to get dark
+    var sunrise = timez(times.sunrise).tz(CONFIG.location.timezone).format('hh:mm'); // sun has started to rise
+    var dawn = timez(times.dawn).tz(CONFIG.location.timezone).format('hh:mm'); // sun has not risen but it is starting to get light
     var group = id; // group address of the group that triggered the rules engine
     var level = device.level; // this is the level of the group that triggered the rules engine, the rules say this is 0-100
 
@@ -205,18 +204,6 @@ function killTimer(group) {
     }
 }
 
-function getTimeString(dd,tzoffset) {
-    // we may need to adjust these times based on the offset
-    dd = new Date(dd.getTime() - tzoffset*60000);
-
-    var hh = dd.getHours();
-    var mm = dd.getMinutes();
-
-    mm = ( mm < 10 ? "0" : "" ) + mm;
-    hh = ( hh < 10 ? "0" : "" ) + hh;
-
-    return hh + ":" + mm;
-}
 
 ////////////////////////////
 // OTHER METHODS
