@@ -173,11 +173,6 @@ function parseMessage(data,type) {
     if(temp[0] == 'level') {
       packet.type = 'info';
       packet.level = humanLevelValue(temp[1]);
-      if(packet.level>0){
-        packet.status = 'on';
-      } else {
-        packet.status = 'off';
-      }
       var ind = (array.length == 3 ? 1 : 0);
       var temp2 = array[ind].match(/\d+/g);
       packet.group = temp2[temp2.length-1];

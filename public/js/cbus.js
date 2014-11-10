@@ -19,10 +19,14 @@ $(document).ready(function(){
               else{
                   thisclass = classon;
               }
-              //console.log(data[i].group+" is valid with: "+data[i].status);
-              //console.log('adding '+data[i].group);
+
               if (!data[i].name){
                  data[i].name = "Group "+data[i].group;
+              }
+              if(data[i].level>0){
+                data[i].status = 'on';
+              } else {
+                data[i].status = 'off';
               }
               var newItem = $('<div onclick="clicker('+data[i].group+')" id="group'+data[i].group+'" status="'+data[i].status+'" level="'+data[i].level+'" class="item '+thisclass+'" location="'+convertToSlug(data[i].location)+'" groupname="'+convertToSlug(data[i].name)+'"><div class="element"><p class="level">'+data[i].level+'</p><h3 class="name">'+data[i].name+'</h3><p class="location">'+data[i].location+'</p><p class="group">ID: '+data[i].group+'</p></div></div>');
               $('#content').isotope( 'insert', newItem );
@@ -123,7 +127,7 @@ socket.on('statusStream', function (data) {
     console.log(data);
     if (data.type == 'update_status') {
         var elem = $('#group'+data.group);
-        $('#group'+data.group).attr("status", data.status);
+
         if(data.level==0){
             data.status = 'off';
             elem.removeClass(classon);
@@ -139,6 +143,8 @@ socket.on('statusStream', function (data) {
             elem.attr("level", data.level);
             elem.find('div.element > p.level').html(data.level);
         }
+
+        $('#group'+data.group).attr("status", data.status);
 
         updateData(elem);
 

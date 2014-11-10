@@ -196,7 +196,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "1": {
@@ -206,7 +205,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "2": {
@@ -216,7 +214,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "3": {
@@ -226,7 +223,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "4": {
@@ -236,7 +232,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "5": {
@@ -246,7 +241,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "6": {
@@ -256,7 +250,6 @@
             "lastchange": 1412315405,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "7": {
@@ -266,7 +259,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "8": {
@@ -276,7 +268,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "9": {
@@ -286,7 +277,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "10": {
@@ -296,7 +286,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "11": {
@@ -306,7 +295,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "12": {
@@ -316,7 +304,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "13": {
@@ -326,7 +313,6 @@
             "lastchange": 1412315067,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "14": {
@@ -336,7 +322,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "15": {
@@ -346,7 +331,6 @@
             "lastchange": 1412315067,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "16": {
@@ -356,7 +340,6 @@
             "lastchange": 1412315577,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "17": {
@@ -366,7 +349,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "18": {
@@ -376,7 +358,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "19": {
@@ -386,7 +367,6 @@
             "lastchange": 1412315289,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "20": {
@@ -396,7 +376,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "21": {
@@ -406,7 +385,6 @@
             "lastchange": 1412315067,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "22": {
@@ -416,7 +394,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "23": {
@@ -426,7 +403,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "24": {
@@ -436,7 +412,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "25": {
@@ -446,7 +421,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "26": {
@@ -456,7 +430,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "27": {
@@ -466,7 +439,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "28": {
@@ -476,7 +448,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "29": {
@@ -486,7 +457,6 @@
             "lastchange": 1412315289,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "30": {
@@ -496,7 +466,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "31": {
@@ -506,7 +475,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "32": {
@@ -516,7 +484,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "33": {
@@ -526,7 +493,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "34": {
@@ -536,7 +502,6 @@
             "lastchange": 1412315067,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "35": {
@@ -546,7 +511,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "36": {
@@ -556,7 +520,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "37": {
@@ -566,7 +529,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "38": {
@@ -576,7 +538,6 @@
             "lastchange": 1412315067,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "39": {
@@ -586,7 +547,6 @@
             "lastchange": 1412318075,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "40": {
@@ -596,7 +556,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "41": {
@@ -606,7 +565,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "42": {
@@ -616,7 +574,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "43": {
@@ -626,7 +583,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "44": {
@@ -636,7 +592,6 @@
             "lastchange": 1412315666,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "45": {
@@ -646,7 +601,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "46": {
@@ -656,7 +610,6 @@
             "lastchange": 1412315289,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "47": {
@@ -666,7 +619,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "48": {
@@ -676,7 +628,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "49": {
@@ -686,7 +637,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "50": {
@@ -696,7 +646,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "51": {
@@ -706,7 +655,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "52": {
@@ -716,7 +664,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "53": {
@@ -726,7 +673,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "54": {
@@ -736,7 +682,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "55": {
@@ -746,7 +691,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "56": {
@@ -756,7 +700,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "57": {
@@ -766,7 +709,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "58": {
@@ -776,7 +718,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "59": {
@@ -786,7 +727,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "60": {
@@ -796,7 +736,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "61": {
@@ -806,7 +745,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "62": {
@@ -816,7 +754,6 @@
             "lastchange": 1412317890,
             "type": "motion",
             "visible": true,
-            "status": "on",
             "vendor": "cbus"
         },
         "63": {
@@ -826,7 +763,6 @@
             "lastchange": 1412315835,
             "type": "motion",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "64": {
@@ -836,7 +772,6 @@
             "lastchange": null,
             "type": "motion",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "65": {
@@ -846,7 +781,6 @@
             "lastchange": null,
             "type": "motion",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "66": {
@@ -856,7 +790,6 @@
             "lastchange": 1412318079,
             "type": "motion",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "67": {
@@ -866,7 +799,6 @@
             "lastchange": null,
             "type": "motion",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "68": {
@@ -876,7 +808,6 @@
             "lastchange": null,
             "type": "motion",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "69": {
@@ -886,7 +817,6 @@
             "lastchange": null,
             "type": "motion",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "70": {
@@ -896,7 +826,6 @@
             "lastchange": null,
             "type": "motion",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "72": {
@@ -906,7 +835,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "73": {
@@ -916,7 +844,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "74": {
@@ -926,7 +853,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "75": {
@@ -936,7 +862,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "76": {
@@ -946,7 +871,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "77": {
@@ -956,7 +880,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "78": {
@@ -966,7 +889,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "79": {
@@ -976,7 +898,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "80": {
@@ -986,7 +907,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "81": {
@@ -996,7 +916,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "82": {
@@ -1006,7 +925,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "83": {
@@ -1016,7 +934,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "84": {
@@ -1026,7 +943,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "85": {
@@ -1036,7 +952,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "86": {
@@ -1046,7 +961,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "87": {
@@ -1056,7 +970,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "88": {
@@ -1066,7 +979,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "89": {
@@ -1076,7 +988,6 @@
             "lastchange": null,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "90": {
@@ -1086,7 +997,6 @@
             "lastchange": 1412315068,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "91": {
@@ -1096,7 +1006,6 @@
             "lastchange": 1412315068,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "92": {
@@ -1106,7 +1015,6 @@
             "lastchange": 1412315068,
             "type": "lighting",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "93": {
@@ -1116,7 +1024,6 @@
             "lastchange": null,
             "type": "sonos",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         },
         "95": {
@@ -1126,7 +1033,6 @@
             "lastchange": 1412315889,
             "type": "motion",
             "visible": true,
-            "status": "off",
             "vendor": "cbus"
         }
     }

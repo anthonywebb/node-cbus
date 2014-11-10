@@ -35,10 +35,10 @@ app.get('/cgate', function (req, res) {
     var command = req.query.cmd.trim() + '\r';
     console.log('remoteCommand : ' + command);
     CBUS.write(command);
-    res.send({ status: 'ok', executed: req.query.cmd});
+    res.json({ status: 'ok', executed: req.query.cmd});
   }
   else {
-    res.send({ status: 'error', message: 'you must specify a command'},400);
+    res.json({ status: 'error', message: 'you must specify a command'},400);
   }
 });
 
@@ -46,7 +46,7 @@ app.get('/cmd', function (req, res) {
     console.log(req.query);
     var commandArray = [{type:'lighting',group:req.query.device,level:parseInt(req.query.level),delay:parseInt(req.query.delay),timeout:parseInt(req.query.timeout)}];
     COMMON.doCommands(commandArray);
-    res.send(JSON.stringify({ status: 'ok'}));
+    res.json(JSON.stringify({ status: 'ok'}));
 });
 
 app.get('/locations', function (req, res) {

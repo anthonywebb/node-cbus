@@ -230,14 +230,11 @@ exports.deviceObjToArray = function(devices){
     _.each(groups,function(group){
         var obj = {group:group};
         obj.level = parseInt(devices[group].level);
-        obj.status = devices[group].status;
         obj.name = devices[group].name;
         obj.location = devices[group].location;
         obj.lastchange = devices[group].lastchange;
-        obj.changecount = devices[group].changecount;
-        obj.runtime = devices[group].runtime;
         obj.type = devices[group].type;
-        obj.energyused = devices[group].energyused;
+        obj.vendor = devices[group].vendor;
 
         // only pop it on the list if it is visible
         if(devices[group].visible){
