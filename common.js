@@ -112,11 +112,11 @@ function processRules(id,device) {
     var times = suncalc.getTimes(dd,CONFIG.location.latitude,CONFIG.location.longitude);
 
     // variables we can use in our expressions
-    var time = timez().tz(CONFIG.location.timezone).format('hh:mm'); // the current time
-    var sunset = timez(times.sunset).tz(CONFIG.location.timezone).format('hh:mm'); // sun starts to set
-    var dusk = timez(times.dusk).tz(CONFIG.location.timezone).format('hh:mm'); // sun has fully set and it is starting to get dark
-    var sunrise = timez(times.sunrise).tz(CONFIG.location.timezone).format('hh:mm'); // sun has started to rise
-    var dawn = timez(times.dawn).tz(CONFIG.location.timezone).format('hh:mm'); // sun has not risen but it is starting to get light
+    var time = timez().tz(CONFIG.location.timezone).format('HH:mm'); // the current time
+    var sunset = timez(times.sunset).tz(CONFIG.location.timezone).format('HH:mm'); // sun starts to set
+    var dusk = timez(times.dusk).tz(CONFIG.location.timezone).format('HH:mm'); // sun has fully set and it is starting to get dark
+    var sunrise = timez(times.sunrise).tz(CONFIG.location.timezone).format('HH:mm'); // sun has started to rise
+    var dawn = timez(times.dawn).tz(CONFIG.location.timezone).format('HH:mm'); // sun has not risen but it is starting to get light
     var group = id; // group address of the group that triggered the rules engine
     var level = device.level; // this is the level of the group that triggered the rules engine, the rules say this is 0-100
 
