@@ -142,7 +142,7 @@ function processRules(id,device) {
 function processUrlCommand(command) {
     request(command.url, function (error, response, body) {
         if (error) {
-          console.log('got back an error when calling '+command.url+': '+err.message);
+          console.log('got back an error when calling '+command.url+': '+error.message);
         } else if (response.statusCode != 200) {
           console.log('got back an error when calling '+command.url+': '+response.statusCode);
         }

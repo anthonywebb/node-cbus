@@ -1,6 +1,11 @@
 var classon = "item-on";
 var classoff = "item-off";
 
+// DIM THE LIGHTS STUFF
+var pos, thisid;
+var speed = 2.8;
+var moved = false;
+
 var $container = $('#content');
 
 $(document).ready(function(){
@@ -28,7 +33,7 @@ $(document).ready(function(){
               } else {
                 data[i].status = 'off';
               }
-              var newItem = $('<div onclick="clicker('+data[i].group+')" id="group'+data[i].group+'" status="'+data[i].status+'" level="'+data[i].level+'" class="item '+thisclass+'" location="'+convertToSlug(data[i].location)+'" groupname="'+convertToSlug(data[i].name)+'"><div class="element"><p class="level">'+data[i].level+'</p><h3 class="name">'+data[i].name+'</h3><p class="location">'+data[i].location+'</p><p class="group">ID: '+data[i].group+'</p></div></div>');
+              var newItem = $('<div onclick="adjustLevel('+data[i].group+')" id="'+data[i].group+'" status="'+data[i].status+'" level="'+data[i].level+'" class="item '+thisclass+'" location="'+convertToSlug(data[i].location)+'" groupname="'+convertToSlug(data[i].name)+'"><div class="element"><p class="level">'+data[i].level+'</p><h3 class="name">'+data[i].name+'</h3><p class="location">'+data[i].location+'</p><p class="group">ID: '+data[i].group+'</p></div></div>');
               $('#content').isotope( 'insert', newItem );
               //console.log('added '+newItem);
           }
@@ -89,6 +94,55 @@ $(document).ready(function(){
 
   $('#searchbox').keydown($.debounce( 250, findthis ));
 
+  // listen for a div click
+  $(document).on(TouchMouseEvent.UP,function(event){
+    
+    $(document).unbind(TouchMouseEvent.MOVE);
+    if(moved) {
+        //alert('dimming '+thisid+' to '+pos.toFixed());
+        adjustLevel(thisid, pos.toFixed());
+    }
+    
+  });
+
+  $(document).delegate('.item',TouchMouseEvent.DOWN,function(event){
+      var previous_x_position = event.pageX;
+      thisid = this.id;
+      moved = false;
+      pos = parseInt($('#'+thisid).attr('level'));
+
+      // add mouse move
+      $(document).bind(TouchMouseEvent.MOVE,function(event){
+        moved = true;
+        var x_position = event.pageX;
+
+          // we are moving right  
+        if(previous_x_position < x_position)
+        {
+            if(pos<100) {
+                pos = pos + speed;
+            }         
+        }
+
+          // we are moving left
+        else if (previous_x_position > x_position)
+        {
+            if(pos>0) {
+                pos = pos - speed;
+            }
+        }
+
+          // set some absolute maximums
+          if(pos>100)pos=100;
+          if(pos<0)pos=0;
+        
+         $('#'+thisid).attr('level',pos.toFixed());
+         $('#'+thisid+' .level').html(pos.toFixed());
+         previous_x_position = x_position;
+      })
+  })
+
+
 });
 
 function findthis(){
@@ -113,7 +167,6 @@ function convertToSlug(Text)
         ;
 }
 
-
 // REALTIME SOCKET STUFF
 
 var socket = io.connect();
@@ -124,9 +177,9 @@ socket.on('connect', function (data) {
 });
 
 socket.on('statusStream', function (data) {
-    console.log(data);
+    //console.log(data);
     if (data.type == 'update_status') {
-        var elem = $('#group'+data.group);
+        var elem = $('#'+data.group);
 
         if(data.level==0){
             data.status = 'off';
@@ -144,7 +197,7 @@ socket.on('statusStream', function (data) {
             elem.find('div.element > p.level').html(data.level);
         }
 
-        $('#group'+data.group).attr("status", data.status);
+        $('#'+data.group).attr("status", data.status);
 
         updateData(elem);
 
@@ -185,25 +238,37 @@ $container.isotope({
   }
 });
 
-function clicker(id) {
-    var elem = $('#group'+id);
+// if no dimlevel is specified, the light will toggle on/off
+function adjustLevel(id, dimlevel) {
+    if(moved==true && !dimlevel){
+      //console.log('this is a dim event, not a click');
+      return;
+    }
+    var elem = $('#'+id);
     var currval = elem.attr("status");
-    if(currval=="off") {
-        turnme = "off";
+    if(currval=="off" || dimlevel > 0) {
+        turnme = "on";
 
         // send these to the api
         apilevel = 100;
+         
+        // if they specified a dimlevel, use that instead of 100
+        if(dimlevel) {
+          apilevel = dimlevel;
+          turnme = "dim to "+dimlevel;
+        }
+      
         apidelay = 0;
         apitimeout = 0;
 
         elem.removeClass(classoff);
         elem.addClass(classon);
         elem.attr("status", "on");
-        elem.attr("level", "100");
-        elem.find('div.element > p.level').html("100");
+        elem.attr("level", apilevel);
+        elem.find('div.element > p.level').html(apilevel);
     }
     else {
-        turnme = "on";
+        turnme = "off";
 
         // send these to the api
         apilevel = 0;
@@ -224,7 +289,7 @@ function clicker(id) {
 };
 
 function updateData(elem){
-  console.log('sorting the grid');
+  //console.log('sorting the grid');
   $container.isotope( 'updateSortData', elem ).isotope();
   //window.scrollTo(0, 0);
 };

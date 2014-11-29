@@ -1,3 +1,12 @@
+/**** Disable the text selection for the drag to dim stuff ****/
+html, body, div, span, object,
+form, input, h1, h2, button, label, a, img {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  /* this will work for QtWebKit in future */
+  -webkit-user-drag: none;
+}
+
 /**** Isotope Filtering ****/
 
 .isotope-item {

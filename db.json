@@ -51,7 +51,7 @@
             "id": "2",
             "enabled": true,
             "name": "Turn off the sport court lights and pause the music if no one is playing",
-            "expression": "group=='65' && level == 0 && db.devices['8'].level > 0",
+            "expression": "group=='65' && level == 0 && DB.devices['8'].level > 0",
             "commands": [
                 {
                     "type": "lighting",
@@ -70,7 +70,7 @@
             "id": "3",
             "enabled": false,
             "name": "Turn on the sport court lights when door opens at night and the light is off",
-            "expression": "group=='Z1' && level > 0 && (time > dusk || time < dawn) && db.devices['8'].level == 0",
+            "expression": "group=='Z1' && level > 0 && (time > dusk || time < dawn) && DB.devices['8'].level == 0",
             "commands": [
                 {
                     "type": "lighting",
