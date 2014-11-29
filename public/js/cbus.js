@@ -211,7 +211,11 @@ socket.on('statusStream', function (data) {
             msg = msg + ' in the ' + data.location;
         }
 
-        msg = msg + ' is ' + data.status.toUpperCase();
+        if(data.level == 100 || data.level == 0){
+          msg = msg + ' is ' + data.status.toUpperCase();
+        } else {
+          msg = msg + ' dimmed to ' + data.level +'%';
+        }
 
         alertify.log(msg);
 
