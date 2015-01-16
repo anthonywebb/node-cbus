@@ -14,7 +14,7 @@
     "moment-timezone": "0.2.*",
     "suncalc": "1.6.*",
     "request": "2.44.*",
-    "cron": "1.0.*"
+    "cron": "1.0.6"
   },
   "engines": {
     "node": "0.10.*"
