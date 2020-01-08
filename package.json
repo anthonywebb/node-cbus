@@ -13,7 +13,7 @@
     "moment": "2.8.*",
     "moment-timezone": "0.2.*",
     "suncalc": "1.6.*",
-    "request": "2.44.*",
+    "request": "2.88.*",
     "cron": "1.0.6"
   },
   "engines": {
