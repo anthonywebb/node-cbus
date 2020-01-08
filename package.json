@@ -10,7 +10,7 @@
     "carrier": "0.1.*",
     "socket.io": "1.2.*",
     "underscore": "1.7.*",
-    "moment": "2.8.*",
+    "moment": "2.24.*",
     "moment-timezone": "0.2.*",
     "suncalc": "1.6.*",
     "request": "2.44.*",
