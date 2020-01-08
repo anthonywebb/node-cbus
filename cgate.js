@@ -144,7 +144,7 @@ function parseMessage(data,type) {
 
     // last element of arr2 is the group
     temp = array[2].match(/\d+/g);
-    packet.group = temp[2];
+    packet.group = temp[3];
 
     var parseunit = array[3];
     var parseoid = array[4];
